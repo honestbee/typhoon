@@ -3,10 +3,11 @@ resource "null_resource" "copy-controller-secrets" {
   count = "${var.controller_count}"
 
   connection {
-    type    = "ssh"
-    host    = "${element(aws_instance.controllers.*.public_ip, count.index)}"
-    user    = "core"
-    timeout = "15m"
+    type        = "ssh"
+    host        = "${element(aws_instance.controllers.*.public_ip, count.index)}"
+    user        = "core"
+    timeout     = "15m"
+    private_key = "${var.ssh_private_key}"
   }
 
   provisioner "file" {
@@ -71,10 +72,11 @@ resource "null_resource" "bootkube-start" {
   ]
 
   connection {
-    type    = "ssh"
-    host    = "${aws_instance.controllers.0.public_ip}"
-    user    = "core"
-    timeout = "15m"
+    type        = "ssh"
+    host        = "${aws_instance.controllers.0.public_ip}"
+    user        = "core"
+    timeout     = "15m"
+    private_key = "${var.ssh_private_key}"
   }
 
   provisioner "file" {

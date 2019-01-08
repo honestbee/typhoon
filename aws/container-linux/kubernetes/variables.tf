@@ -15,6 +15,21 @@ variable "dns_zone_id" {
   description = "AWS Route53 DNS Zone ID (e.g. Z3PAABBCFAKEC0)"
 }
 
+variable "vpc_id" {
+  type        = "string"
+  description = "The ID of the VPC"
+}
+
+variable "subnet_ids" {
+  type        = "list"
+  description = "A list of the subnet ids"
+}
+
+variable "security_groups" {
+  type        = "list"
+  description = "A list of the security groups"
+}
+
 # instances
 
 variable "controller_count" {
@@ -84,6 +99,11 @@ variable "worker_clc_snippets" {
 }
 
 # configuration
+
+variable "ssh_private_key" {
+  type        = "string"
+  description = "SSH private key for connnecting as user 'core'"
+}
 
 variable "ssh_authorized_key" {
   type        = "string"
